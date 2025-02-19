@@ -1,0 +1,141 @@
+1)Write a query to display the member id, member name, city and membership status who are all having life time membership. Hint: Life time membership status is “Permanent”.
+
+select MEMBER_ID,MEMBER_NAME,CITY,MEMBERSHIP_STATUS 
+from LMS_MEMBERS 
+where MEMBERSHIP_STATUS="Permanent";
+
+2)Write a query to display the book code, publication, price and supplier name of the book witch is taken frequently.
+
+select lbd.BOOK_CODE,lbd.publication,lbd.price,lsd.SUPPLIER_NAME
+from LMS_BOOK_DETAILS lbd
+left join
+LMS_SUPPLIERS_DETAILS lsd on lbd.SUPPLIER_ID=lsd.SUPPLIER_ID
+left join
+LMS_BOOK_ISSUE lmi on lbd.BOOK_CODE=lmi.BOOK_CODE
+ group by lmi.BOOK_CODE having count(lmi.BOOK_CODE)>1;
+
+3)Write a query to display the member id, member name who have taken the book with book code 'BL000002'.
+
+select lm.MEMBER_ID,lm.MEMBER_NAME,lmi.BOOK_CODE
+from LMS_MEMBERS lm
+left
+join LMS_BOOK_ISSUE lmi on lm.MEMBER_ID=lmi.MEMBER_ID
+where lmi.BOOK_CODE="BL000002";
+
+4)Write a query to display the book code, book title and author of the books -whose author name begins with 'P'
+
+select BOOK_CODE,BOOK_TITLE,AUTHOR from LMS_BOOK_DETAILS  where AUTHOR like "P%";
+
+
+5)Write a query to display the total number of Java books available in library with alias name ‘NO_OF_BOOKS’.
+
+select count(CATEGORY) as NO_OF_BOOKS 
+from LMS_BOOK_DETAILS
+group by CATEGORY
+having CATEGORY="JAVA";
+
+
+--Problem # 6: Write a query to list the category and number of books in each category with alias name ‘NO_OF_BOOKS’.
+
+select CATEGORY	,Count(CATEGORY)
+from LMS_BOOK_DETAILS group by CATEGORY;
+
+--Problem # 7: Write a query to display the number of books published by "Prentice Hall” with the alias name “NO_OF_BOOKS”
+
+select count(PUBLICATION) as NO_OF_BOOKS from LMS_BOOK_DETAILS
+group by PUBLICATION having PUBLICATION="Prentice Hall";
+
+
+--Problem # 8: Write a query to display the book code, book title of the books which are issued on the date "1st April 2012".
+
+select lbd.BOOK_CODE,lbd.BOOK_TITLE	from 
+LMS_BOOK_DETAILS lbd left join LMS_BOOK_ISSUE lbi 
+on lbi.BOOK_CODE=lbd.BOOK_CODE
+where lbi.DATE_ISSUE="2012-04-01";
+
+
+select BOOK_CODE,BOOK_TITLE from LMS_BOOK_DETAILS where BOOK_CODE in(select BOOK_CODE from LMS_BOOK_ISSUE where DATE_ISSUE="2012-04-01");
+
+--Problem # 9: Write a query to display the member id, member name, date of registration and expiry date of the members whose membership expiry date is before APR 2013.
+
+
+SELECT MEMBER_ID, MEMBER_NAME, DATE_REGISTER, DATE_EXPIRE
+FROM LMS_MEMBERS
+WHERE DATE_EXPIRE < '2013-04-01';
+
+
+--Problem # 10: write a query to display the member id, member name, date of registration, membership status of the members who registered before "March 2012" and membership status is "Temporary"
+
+select MEMBER_ID,MEMBER_NAME,DATE_REGISTER,MEMBERSHIP_STATUS
+from LMS_MEMBERS
+where DATE_REGISTER < '2012-03-01'
+AND MEMBERSHIP_STATUS = 'Temporary';
+
+
+--Problem #11: Write a query to display the member id, member name who’s City is CHENNAI or DELHI. Hint: Display the member name in title case with alias name 'Name'.
+
+select MEMBER_ID,MEMBER_NAME 
+from LMS_MEMBERS
+where CITY="CHENNAI" or CITY="DELHI";
+
+
+
+-Problem #12: Write a query to concatenate book title, author and display in the following format. Book_Title_is_written_by_Author Example: Let Us C_is_written_by_Yashavant Kanetkar Hint: display unique books. Use “BOOK_WRITTEN_BY” as alias name.
+
+
+select CONCAT(BOOK_TITLE,"_is_written_by_",AUTHOR)
+from LMS_BOOK_DETAILS;
+
+
+
+
+
+
+
+
+
+AVERAGE
+
+1)Write a query to display the member id, member name of the members, book code and book title of the books taken by them.
+
+select lm.MEMBER_ID,lm.MEMBER_NAME,lbd.BOOK_CODE,lbd.BOOK_TITLE from
+LMS_MEMBERS lm 
+left join
+LMS_BOOK_ISSUE lbi on lm.MEMBER_ID=lbi.MEMBER_ID
+join 
+LMS_BOOK_DETAILS lbd on lbi.BOOK_CODE=lbd.BOOK_CODE;
+
+
+2)Write a query to display the total number of books available in the library with alias name “NO_OF_BOOKS_AVAILABLE” (Which is not issued). Hint: The issued books details are available in the LMS_BOOK_ISSUE table.
+
+SELECT COUNT(lbd.BOOK_CODE)
+FROM LMS_BOOK_DETAILS lbd
+WHERE lbd.BOOK_CODE NOT IN (SELECT BOOK_CODE FROM LMS_BOOK_ISSUE);
+
+
+3)Write a query to display the member id, member name, fine range and fine amount of the members whose fine amount is less than 100.
+
+select lm.MEMBER_ID,lm.MEMBER_NAME,lfd.FINE_RANGE,lfd.FINE_AMOUNT
+from LMS_MEMBERS lm  join
+LMS_BOOK_ISSUE lbi on lm.MEMBER_ID=lbi.MEMBER_ID
+join LMS_FINE_DETAILS lfd on lbi.FINE_RANGE=lfd.FINE_RANGE
+where lfd.FINE_AMOUNT<100;
+
+
+4)Write a query to display the book code, book title, publisher, edition, price and year of publication and sort based on year of publication, publisher and edition.
+
+
+select BOOK_CODE,BOOK_TITLE,PUBLICATION,BOOK_EDITION,PRICE,SUBSTRING(PUBLISH_DATE,1,4) as year from LMS_BOOK_DETAILS
+order by SUBSTRING(PUBLISH_DATE,1,4),PUBLICATION,BOOK_EDITION;
+
+
+5)Write a query to display the book code, book title and rack number of the books which are placed in rack 'A1' and sort by book title in ascending order
+
+select BOOK_CODE,BOOK_TITLE,RACK_NUM 
+from LMS_BOOK_DETAILS
+where RACK_NUM="A1"
+order by BOOK_TITLE;
+
+
+
+

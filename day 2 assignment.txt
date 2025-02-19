@@ -1,0 +1,325 @@
+1)class Main {
+    String name;
+    int number;
+   void displayInfo(){
+        System.out.println("The name of the sport is"+ name);
+        System.out.println("The number of the sport is"+ number);
+    }
+
+    
+    public static void main(String[] args) {
+        Main cricket= new Main();
+        cricket.name="Cricket";
+        cricket.number=1;
+        cricket.displayInfo();
+        
+        
+        
+    }
+
+2)
+
+class Game {
+    String name;
+    int number;
+   void displayInfo(){
+        System.out.println("The name of the sport is"+ name);
+        System.out.println("The number of the sport is"+ number);
+    }
+}
+class Game1 extends Game{
+    int players;
+    Game1(String name,int number,int players){
+        this.name=name;
+        this.number=number;
+        this.players=players;
+    }
+     void displayInfo(){
+        System.out.println("The name of the sport is "+ name);
+        System.out.println("The number of the sport is "+ number);
+        System.out.println("The player of the sport is "+ players);
+}
+}
+public class Main{
+    
+    public static void main(String[] args) {
+        Game1 cricket= new Game1("Cricket",1,11);
+        cricket.displayInfo();
+        Game1 football= new Game1("Football",2,8);
+        football.displayInfo();
+        Game1 tennis= new Game1("Tennis",3,2);
+        tennis.displayInfo();
+    }
+}
+
+3)
+
+class Game {
+    String name;
+    int number;
+   void displayInfo(){
+        System.out.println("The name of the sport is"+ name);
+        System.out.println("The number of the sport is"+ number);
+    }
+}
+class Game1 extends Game{
+    int players;
+    Game1(String name,int number,int players){
+        this.name=name;
+        this.number=number;
+        this.players=players;
+    }
+    @Override
+     void displayInfo(){
+        System.out.println("The name of the sport is "+ name);
+        System.out.println("The number of the sport is "+ number);
+        System.out.println("The player of the sport is "+ players);
+}
+}
+public class Main{
+    
+    public static void main(String[] args) {
+        // Game1 cricket= new Game1("Cricket",1,11);
+        // cricket.displayInfo();
+        // Game1 football= new Game1("Football",2,8);
+        // football.displayInfo();
+        // Game1 tennis= new Game1("Tennis",3,2);
+        // tennis.displayInfo();
+        Game1 game[]=new Game1[5];
+        game[0]=new Game1("Cricket",1,11);
+        game[1]=new Game1("Cricket",1,11);
+        game[2]=new Game1("Tennis",2,22);
+        game[3]=new Game1("Football",3,21);
+        game[4]=new Game1("Tennis",2,22);
+        
+        
+        for ( Game1 g:game){
+            g.displayInfo();
+        }
+    }
+}
+
+3)class Shape{
+    int length=10;
+    void calculateArea(){
+        System.out.println("The length is "+length);
+        
+    }
+}
+    class Rectangle extends Shape{
+        Rectangle(){
+        System.out.println("This is rectangle");
+    }
+    void calculateArea(int b){
+        System.out.println("The length is "+length);
+        System.out.println("The breadth is "+b);
+        System.out.println("Area is "+(length*b));
+    }
+    }
+class Square extends Shape{
+        Square(){
+        System.out.println("This is square");
+    }
+    void calculateArea(){
+        System.out.println("The side is "+length);
+        System.out.println("Area is "+(length*length));        
+    }
+    }
+class Triangle extends Shape{
+        Triangle(){
+        System.out.println("This is triangle");
+    }
+    void calculateArea(int h){
+        System.out.println("The length is "+length);
+        System.out.println("The height is "+h);
+        System.out.println("Area is "+(0.5*length*h));
+         
+    }
+    }
+public class Main{
+    public static void main(String args[])
+    {
+        Rectangle r=new Rectangle();
+        r.calculateArea(4);
+        Square s=new Square();
+     s.calculateArea();
+        Triangle t=new Triangle();
+         t.calculateArea(5);
+    }
+}
+
+
+4)
+
+class Main {
+    String areacode;
+    String exchange;
+    String extension;
+    
+    Main(String areacode,String exchange,String extension)
+    {
+        this.areacode=areacode;
+        this.exchange=exchange;
+        this.extension=extension;
+    }
+    
+    public String toString(){
+     return ("("+areacode+") "+exchange+"-"+extension);
+    }
+    
+    public  boolean equals(Main obj)
+    {
+        return areacode.equals(obj.areacode)&&exchange.equals(obj.exchange)&&extension.equals(obj.extension);
+    }
+    
+    public static void main(String[] args) {
+        Main p1=new Main("800","867","5309");
+        Main p2=new Main("800","857","5309");
+        String res=p1.toString();
+        System.out.println(res);
+        System.out.println(p1.equals(p2));
+    }
+}
+
+
+5)
+
+
+class Student
+{
+        int rollno;
+        String fname;
+        Student(int rollno,String fname){
+            this.rollno=rollno;
+            this.fname=fname;
+        }
+        
+        void modify(int n){
+            n++;
+        }
+        void modify(Student s){
+            rollno++;
+        }
+        void modify(String fname){
+            this.fname=fname;
+        }
+        void printdetails(){
+            System.out.println(rollno+" "+fname);
+        }
+}
+class ParamPassingDemo1
+{
+    public static void main (String[] args) {
+        /* code */
+        Student s=new Student(1,"Pavan");
+        s.printdetails();
+        s.modify(5);
+        s.modify("Arjun");
+        s.modify(s);
+        s.printdetails();
+        
+	}
+	
+}
+
+5)
+abstract class Instrument {
+    // Abstract play method, to be implemented in each subclass
+    abstract void play();
+}
+
+class Piano extends Instrument {
+    @Override
+    void play() {
+        System.out.println("Piano is playing tan tan tan tan");
+    }
+}
+
+class Flute extends Instrument {
+    @Override
+    void play() {
+        System.out.println("Flute is playing toot toot toot toot");
+    }
+}
+
+class Guitar extends Instrument {
+    @Override
+    void play() {
+        System.out.println("Guitar is playing tin tin tin");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Instrument[] instruments = new Instrument[10];
+
+      
+        instruments[0] = new Piano();
+        instruments[1] = new Flute();
+        instruments[2] = new Guitar();
+        instruments[3] = new Piano();
+        instruments[4] = new Flute();
+        instruments[5] = new Guitar();
+        instruments[6] = new Piano();
+        instruments[7] = new Guitar();
+        instruments[8] = new Flute();
+        instruments[9] = new Guitar();
+
+       
+        for (int i = 0; i < instruments.length; i++) {
+            instruments[i].play(); 
+
+            
+            if (instruments[i] instanceof Piano) {
+                System.out.println("Object at index " + i + " is of type Piano.");
+            } else if (instruments[i] instanceof Flute) {
+                System.out.println("Object at index " + i + " is of type Flute.");
+            } else if (instruments[i] instanceof Guitar) {
+                System.out.println("Object at index " + i + " is of type Guitar.");
+            }
+        }
+    }
+}
+
+
+6)public class ParamPassingDemo2 {
+
+    public void swap(int a, int b) {
+        System.out.println("Before swap (int): a = " + a + ", b = " + b);
+        // Swapping the integers
+        int temp = a;
+        a = b;
+        b = temp;
+        System.out.println("After swap (int): a = " + a + ", b = " + b);
+    }
+
+    
+    public void swap(int[] arr1, int[] arr2) {
+        System.out.println("Before swap (arrays): arr1 = " + arr1[0] + "," + arr1[1] + "," + arr1[2] + ", arr2 = " + arr2[0] + "," + arr2[1] + "," + arr2[2]);
+        
+        int[] temp = arr1;
+        arr1 = arr2;
+        arr2 = temp;
+
+        System.out.println("After swap (arrays): arr1 = " + arr1[0] + "," + arr1[1] + "," + arr1[2] + ", arr2 = " + arr2[0] + "," + arr2[1] + "," + arr2[2]);
+    }
+
+    public static void main(String[] args) {
+        ParamPassingDemo2 demo = new ParamPassingDemo2();
+
+       
+        int x = 5;
+        int y = 10;
+        System.out.println("Before swap method call (int): x = " + x + ", y = " + y);
+        demo.swap(x, y);
+        System.out.println("After swap method call (int): x = " + x + ", y = " + y); // Check if original values changed
+
+       
+        int[] array1 = {1, 2, 3};
+        int[] array2 = {4, 5, 6};
+        System.out.println("Before swap method call (arrays): array1 = " + array1[0] + "," + array1[1] + "," + array1[2] + ", array2 = " + array2[0] + "," + array2[1] + "," + array2[2]);
+        demo.swap(array1, array2);
+        System.out.println("After swap method call (arrays): array1 = " + array1[0] + "," + array1[1] + "," + array1[2] + ", array2 = " + array2[0] + "," + array2[1] + "," + array2[2]); 
+    }
+}
